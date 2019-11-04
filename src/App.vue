@@ -6,33 +6,34 @@
 </template>
 
 <script>
-import Home from "./components/Home.vue"
-import Editor from "./components/Editor.vue"
+import Home from "./components/Home.vue";
+import Editor from "./components/Editor.vue";
+import Vue from "vue";
+Vue.config.devtools = true;
 
 export default {
   name: "app",
-  data(){
-    return{
+  data() {
+    return {
       isLogin: false,
       userData: null
     };
   },
 
-  // Vue.jsがコンポーネントを作成したタイミングで実行される。
-  mounted: function(){
-    firebase.auth().onAuthStateChanged(user =>{
+  mounted: function() {
+    firebase.auth().onAuthStateChanged(user => {
       console.log(user);
-      if(user){
+      if (user) {
         this.isLogin = true;
         this.userData = user;
-      }else{
+      } else {
         this.isLogin = false;
         this.userData = nill;
-      };
+      }
     });
   },
 
-  components:{
+  components: {
     Home: Home,
     Editor: Editor
   }
